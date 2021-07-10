@@ -1,19 +1,15 @@
 package com.example.demotransaction.domain.entity;
 
 import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
 @Entity
 @Table(name = "goods")
-@EntityListeners(AuditingEntityListener.class)
 @Getter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Goods {
 
     @Id
@@ -35,6 +31,15 @@ public class Goods {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Builder
+    private Goods(String goodsCode, String goodsName, Integer goodsPrice, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.goodsCode = goodsCode;
+        this.goodsName = goodsName;
+        this.goodsPrice = goodsPrice;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public void changeBaseInfo(String goodsName,Integer goodsPrice){
             this.goodsName = goodsName;

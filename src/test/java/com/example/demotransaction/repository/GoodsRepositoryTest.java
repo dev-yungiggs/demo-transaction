@@ -42,7 +42,6 @@ public class GoodsRepositoryTest {
         Integer goodsPrice = 3000;
         Goods newGoods =
                 Goods.builder()
-                        .goodsId(null)
                         .goodsCode(goodsCode)
                         .goodsName(goodsName)
                         .goodsPrice(goodsPrice)
@@ -74,6 +73,11 @@ public class GoodsRepositoryTest {
         Optional<Goods> optGoods = goodsRepository.findGoodsByGoodsCode(goodsCode);
 
         //then
+        Assertions.assertThat(optGoods)
+                .isPresent()
+                .get()
+                .extracting(Goods::toString)
+                .isNotNull();
         Assertions.assertThat(optGoods)
                 .isPresent()
                 .get()
